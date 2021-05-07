@@ -46,7 +46,6 @@ class FavoritesFragment : Fragment(), EditDialog.DialogListener {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(MovieFavoritesViewModel::class.java)
 
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -59,12 +58,6 @@ class FavoritesFragment : Fragment(), EditDialog.DialogListener {
         return binding.root
     }
 
-    // This is called when recyclerview item edit button is clicked
-    private fun onEditMovieClicked(movieObj: Movie) {
-        val dialogue = EditDialog()
-        dialogue.show(parentFragmentManager, "bla")
-        binding.viewModel?.onUpdate(movieObj)
-    }
 
     // This is called when recyclerview item remove button is clicked
     private fun onDeleteMovieClicked(movieId: Long) {
@@ -75,8 +68,18 @@ class FavoritesFragment : Fragment(), EditDialog.DialogListener {
         binding.viewModel?.onClear()
     }
 
+    // This is called when recyclerview item edit button is clicked
+    private fun onEditMovieClicked(movieObj: Movie) {
+        val dialogue = EditDialog()
+        binding.viewModel?.selectedMovie = movieObj
+        dialogue.show(childFragmentManager, "dialog_fragment")
+    }
+
+
+    // Callback for the dialog
     override fun onDialogPositiveClick(text: String) {
-        Toast.makeText(requireContext(), "Callback received.", Toast.LENGTH_SHORT).show()
+        binding.viewModel?.selectedMovie?.note = text
+        binding.viewModel?.onUpdate(binding.viewModel?.selectedMovie!!)
     }
 
 

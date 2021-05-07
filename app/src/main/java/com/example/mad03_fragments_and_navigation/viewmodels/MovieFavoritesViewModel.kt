@@ -13,7 +13,7 @@ class MovieFavoritesViewModel(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-
+    lateinit var selectedMovie: Movie
     val favorites = repository.getAll()
 
     fun onUpdate(movie: Movie) {

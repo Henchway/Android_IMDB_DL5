@@ -9,10 +9,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.mad03_fragments_and_navigation.database.AppDatabase
 import com.example.mad03_fragments_and_navigation.databinding.ActivityMainBinding
+import com.example.mad03_fragments_and_navigation.repositories.MovieRepository
 import com.example.mad03_fragments_and_navigation.utils.EditDialog
 
-class MainActivity : AppCompatActivity(), EditDialog.DialogListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var binding: ActivityMainBinding
@@ -67,9 +69,4 @@ class MainActivity : AppCompatActivity(), EditDialog.DialogListener {
         super.onRestart()
     }
 
-    override fun onDialogPositiveClick(text: String) {
-
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-
-    }
 }
